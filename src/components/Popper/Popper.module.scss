@@ -1,0 +1,11 @@
+// CSS CƠ BẢN VÀ DÙNG CHUNG CỦA POPPER
+// KHI SỬ DỤNG RIÊNG THÌ SẼ ĐỊNH NGHĨA RIÊNG
+.wrapper {
+    width: 100%; // sẽ lớn bằng lớp cha của nó là class search-result
+    max-height: min((100vh - 96px) - 60px, 734px);
+    min-height: 100px;
+    padding-top: 8px;
+    border-radius: 8px;
+    background: rgb(255, 255, 255);
+    box-shadow: rgb(0 0 0 /12%) 0px 2px 12px;
+}

@@ -22,10 +22,13 @@
     align-items: center;
     justify-content: space-between; //cho thằng search ra giữa header(chiều ngang) {chia đều header cho các(3) lớp con của nó}
 }
+.search,
+.search-result {
+    width: 361px; //độ rộng của khung thanh tìm kiếm
+}
 //điều chỉnh phần tìm kiếm
 .search {
     position: relative;
-    width: 361px;
     height: var(--search-height);
     padding-left: 16px;
     display: flex; //thu gọn và xắp xếp ngăn nắp các thẻ theo chiều ngang nếu đủ vị trí
