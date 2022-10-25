@@ -1,0 +1,92 @@
+//HEADER
+.wrapper {
+    --search-boder-radius: 92px; //độ cong của boder
+    --search-height: 46px; //chiều cao của thanh search
+    --search-top-spacer: 9px; //khoảng cách bên trên
+    --search-button-width: 52px; //chiều rộng
+
+    width: 100%;
+    height: var(
+        --default-layout-header-height,
+        60px
+    ); // đây là biến chứa chiều cao đã tạo ở GlobalStyle|{,60px => nếu không khai báo biến thì sẽ lấy 60px}|
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%); //đường kẻ
+    display: flex; //thu gọn và xắp xếp ngăn nắp các thẻ theo chiều ngang nếu đủ vị trí
+    justify-content: center; //căn giữa các lớp con của Header {inner}
+}
+.inner {
+    height: 100%; //kế thừa lại 100% của cha {wrapper}
+    width: var(--default-layout-width, 1150px); //chiều dài
+    // đây là biến chứa chiều DÀI đã tạo ở GlobalStyle|{,1150px => nếu không khai báo biến thì sẽ lấy 1150px}|
+    display: flex; //thu gọn và xắp xếp ngăn nắp các thẻ theo chiều ngang nếu đủ vị trí
+    align-items: center;
+    justify-content: space-between; //cho thằng search ra giữa header(chiều ngang) {chia đều header cho các(3) lớp con của nó}
+}
+//điều chỉnh phần tìm kiếm
+.search {
+    position: relative;
+    width: 361px;
+    height: var(--search-height);
+    padding-left: 16px;
+    display: flex; //thu gọn và xắp xếp ngăn nắp các thẻ theo chiều ngang nếu đủ vị trí
+    background-color: rgba(22, 24, 35, 0.06); //màu nền
+    border-radius: var(--search-boder-radius); //đường bo
+    border: 1.5px solid transparent; // viền 1.5px có màu trong suốt
+
+    //định dạng cho thẻ input là nằm trong  div search
+    input {
+        flex: 1;
+        height: 100%; //cho chiều rộng của input = search
+        color: var(--black);
+        font-size: 1.6rem; //1.6rem = 16px
+        caret-color: var(--primary); // khi đưa chuột vào chữ sẽ đổi màu
+        background-color: transparent; // background trong suốt
+    }
+    //khi input có chữ thì sẽ đổi màu kính lúp
+    input:not(:placeholder-shown) ~ .search-btn {
+        color: rgba(22, 24, 35, 0.75);
+    }
+    &::after {
+        //thêm 1 thanh dựng đứng ngăn cách
+        content: '';
+        position: absolute;
+        top: var(--search-top-spacer);
+        right: var(--search-button-width);
+        height: calc(var(--search-height) - var(--search-top-spacer) * 2);
+        width: 1px;
+        background-color: rgba(22, 24, 35, 0.12);
+    }
+    &:focus-within {
+        //khi thẻ này đc focus thì sẽ đổi màu của viền
+        border-color: rgba(22, 24, 35, 0.2);
+    }
+}
+
+.loading,
+.clear {
+    position: absolute;
+    right: calc(var(--search-button-width) + 16px); // cách bên trái 52px tính từ lớp cha
+    // căn giữa
+    top: 50%;
+    transform: translateY(-50%);
+    //màu của nút clear
+    color: rgba(22, 24, 35, 0.34);
+}
+
+.search-btn {
+    width: var(--search-button-width);
+    height: 100%;
+    border-top-right-radius: var(--search-boder-radius); // bo góc trên bên phải
+    border-bottom-right-radius: var(--search-boder-radius); //bo góc dưới bên phải
+    font-size: 1.8rem; //kích thước của kính lúp
+    color: rgba(22, 24, 35, 0.34);
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(22, 24, 35, 0.03); // màu khi hover
+    }
+    &:active {
+        //background của btn sẽ đổi màu khi ấn vào
+        background: rgba(22, 24, 35, 0.06);
+    }
+}

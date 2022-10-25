@@ -1,0 +1,18 @@
+//KHUNG NGOÀI CỦA SIDEBAR VÀ CONTENT
+
+.wrapper {
+    width: 100%;
+    display: flex; //thu gọn các thẻ và xắp xếp ngăn nắp (theo hàng ngang nếu đủ vị trí)
+    flex-direction: column; //quy định hướng của wrapper
+    align-items: center; //căn giữa layout của phần layout mặc định{không bao gồm header}
+}
+.container {
+    display: flex;
+    width: var(--default-layout-width, 1150px); // chiều dài của khung ngoài sidebar và conten
+    // đây là biến chứa chiều DÀI đã tạo ở GlobalStyle|{,1150px => nếu không khai báo biến thì sẽ lấy 1150px}|
+}
+.content {
+    flex: 1;
+    background-color: chocolate;
+    min-height: 1000px; // nên đặt min height đây là cỡ nhỏ nhất , nếu có nhiều nội dung thì thẻ sẽ dãn ra
+}
