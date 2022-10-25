@@ -8,6 +8,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <GlobalStyle>
+    <h1>La toi day</h1>
             <App />
         </GlobalStyle>
     </React.StrictMode>,
