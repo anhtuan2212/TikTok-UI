@@ -1,0 +1,15 @@
+.wrapper {
+    font-size: 1.6rem;
+    font-weight: 700;
+    min-width: 100px;
+    padding: 9px 16px;
+    border-radius: 4px;
+    cursor: pointer; //chuyển đổi hình dáng của chuột khi đưa chuột đến vị trí của nó
+}
+.primary {
+    color: var(--white);
+    background-color: var(--primary);
+    &:hover {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), #fe2c55;
+    }
+}

@@ -1,0 +1,32 @@
+.Wrapper {
+    display: flex; // cho lên cùng hàng
+    align-items: center; //căn giữa
+    padding: 6px 16px;
+    cursor: pointer;
+
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
+}
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; //bo tròn lại avatar
+    object-fit: cover; //giữ ảnh đúng tỷ lệ và tràn hình tròn
+}
+.info {
+    flex: 1; // để nó tràn ra content
+    margin-left: 12px; //cách phần tử bên cạnh 12px
+}
+.name {
+    font-size: 1.6rem; //tương đương 16px
+    font-weight: 600;
+}
+.check {
+    margin-left: 6px;
+    color: rgb(32, 213, 236);
+}
+.username {
+    font-size: 1.4rem;
+    color: rgb(22, 24, 35, 0.5);
+}

@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 
+import Button from '~/components/Button';
 import Style from './Header.module.scss';
 import images from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
+import AccountItem from '~/components/AccountItem';
 
 const cx = classNames.bind(Style); //dùng Style qua bind để có thể dùng được dấu {-} trong css
 
@@ -14,7 +16,7 @@ function Header() {
     const [searchResult, setSearchResult] = useState([]);
     useEffect(() => {
         setTimeout(() => {
-            setSearchResult([1, 2, 3]);
+            setSearchResult([]);
         }, 0);
     }, []);
     return (
@@ -34,7 +36,10 @@ function Header() {
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                             <PopperWrapper>
                                 <h4 className={cx('search-title')}>Accounts</h4>
-                                ĐANG HỌC DỞ ĐẾN 25:00
+                                <AccountItem />
+                                <AccountItem />
+                                <AccountItem />
+                                <AccountItem />
                             </PopperWrapper>
                         </div>
                     )}
@@ -53,7 +58,16 @@ function Header() {
                     </div>
                 </Tippy>
                 {/* PHẦN ACTION  */}
-                <div className={cx('actions')}></div>
+                <div className={cx('actions')}>
+                    <Button
+                        primary
+                        href="https://www.youtube.com/watch?v=LPGQoWG7pno&list=PL_-VfJajZj0UXjlKfBwFX73usByw3Ph9Q&index=65"
+                        target="_blank"
+                    >
+                        Log in
+                    </Button>
+                    17:00
+                </div>
             </div>
         </header>
     );
