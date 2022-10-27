@@ -17,6 +17,7 @@
 .inner {
     height: 100%; //kế thừa lại 100% của cha {wrapper}
     width: var(--default-layout-width, 1150px); //chiều dài
+    padding: 0 var(--default-layout-horizontal-spacer);
     // đây là biến chứa chiều DÀI đã tạo ở GlobalStyle|{,1150px => nếu không khai báo biến thì sẽ lấy 1150px}|
     display: flex; //thu gọn và xắp xếp ngăn nắp các thẻ theo chiều ngang nếu đủ vị trí
     align-items: center;
@@ -97,4 +98,14 @@
         //background của btn sẽ đổi màu khi ấn vào
         background: rgba(22, 24, 35, 0.06);
     }
+}
+.btn-lg {
+    color: blue;
+}
+.more-btn {
+    font-size: 2rem;
+    margin: 28px;
+    padding: 4px 8px;
+    background: transparent;
+    cursor: pointer;
 }

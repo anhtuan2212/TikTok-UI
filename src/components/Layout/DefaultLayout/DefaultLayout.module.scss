@@ -8,6 +8,7 @@
 }
 .container {
     display: flex;
+    padding: 0 var(--default-layout-horizontal-spacer);
     width: var(--default-layout-width, 1150px); // chiều dài của khung ngoài sidebar và conten
     // đây là biến chứa chiều DÀI đã tạo ở GlobalStyle|{,1150px => nếu không khai báo biến thì sẽ lấy 1150px}|
 }

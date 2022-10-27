@@ -1,7 +1,15 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCircleQuestion,
+    faCircleXmark,
+    faEarthAsia,
+    faEllipsisVertical,
+    faKeyboard,
+    faMagnifyingGlass,
+    faSpinner,
+} from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 
 import Button from '~/components/Button';
@@ -9,9 +17,44 @@ import Style from './Header.module.scss';
 import images from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
+import Menu from '~/components/Popper/Menu';
 
 const cx = classNames.bind(Style); //dùng Style qua bind để có thể dùng được dấu {-} trong css
-
+const MENU_ITEMS = [
+    {
+        icon: <FontAwesomeIcon icon={faEarthAsia} />,
+        title: 'Tiếng Việt',
+        children: {
+            title: 'Language',
+            data: [
+                {
+                    type: 'Language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'Language',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'Language',
+                    code: 'cn',
+                    title: '中文',
+                },
+            ],
+        },
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+        title: 'Feedback and help',
+        to: '/feedback',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        title: 'Keyboard shortcuts',
+    },
+];
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
     useEffect(() => {
@@ -19,6 +62,15 @@ function Header() {
             setSearchResult([]);
         }, 0);
     }, []);
+    const handleMenuChange = (menuItem) => {
+        switch (menuItem.type) {
+            case 'Language':
+                // xử lý logic khi ấn vào ngôn ngữ
+                break;
+
+            default:
+        }
+    };
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -59,14 +111,19 @@ function Header() {
                 </Tippy>
                 {/* PHẦN ACTION  */}
                 <div className={cx('actions')}>
-                    <Button
-                        primary
-                        href="https://www.youtube.com/watch?v=LPGQoWG7pno&list=PL_-VfJajZj0UXjlKfBwFX73usByw3Ph9Q&index=65"
-                        target="_blank"
-                    >
+                    {/* khi truyền className vào component Button thì ta sẽ custom ở header.module.scss */}
+                    {/* <Button primary leftIcon={<FontAwesomeIcon icon={faSignIn} />}>
+                        LOgin
+                    </Button> */}
+                    <Button text>Upload</Button>
+                    <Button primary onClick={() => alert('Clicked !')}>
                         Log in
                     </Button>
-                    17:00
+                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
+                        <button className={cx('more-btn')}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </button>
+                    </Menu>
                 </div>
             </div>
         </header>

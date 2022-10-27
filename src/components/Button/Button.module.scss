@@ -1,15 +1,77 @@
 .wrapper {
+    display: inline-flex; // để cho các phần tử trong button xếp thẳng theo chiều ngang
+    justify-content: center;
     font-size: 1.6rem;
     font-weight: 700;
     min-width: 100px;
     padding: 9px 16px;
     border-radius: 4px;
+
     cursor: pointer; //chuyển đổi hình dáng của chuột khi đưa chuột đến vị trí của nó
+    background-color: var(--white);
+    user-select: none;
+    border: 1px solid transparent;
+    + .wrapper {
+        //khi có thêm nhiều phần tử ở trong wrapper đứng cạnh nhau thì sẽ giãn ra
+        // nếu đứng 1 mình sẽ không giãn khoảng cách
+        //khi sử dụng thì chỉ giãn khoảng cách phần tử trong wrapper , các phần tử ngoài k bị ảnh hưởng
+        margin-left: 8px;
+    }
+    &.disabled {
+        //cấu hình cho nó ở trên cùng luôn để ưu tiên nó thực thi trước khi nó kịp thực thi các chức năng
+        pointer-events: none;
+        opacity: 0.5;
+    }
 }
+.icon + .title,
+.title + .icon {
+    //tình huống icon ở bên trái hoặc bên phải
+    margin-left: 8px;
+    text-align: center;
+}
+.icon {
+    display: inline-block; //để có thể set width
+}
+.rounded {
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+    border-color: rgba(22, 24, 35, 0.12);
+    &:hover {
+        border-color: rgba(22, 24, 35, 0.2);
+        background-color: rgba(22, 24, 35, 0.03);
+    }
+}
+//loại button
 .primary {
     color: var(--white);
     background-color: var(--primary);
+    border-color: var(--primary);
     &:hover {
+        border-color: var(--primary);
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), #fe2c55;
+    }
+}
+.outline {
+    color: var(--primary);
+    border-color: currentColor; //lấy theo  màu color
+    &:hover {
+        border-color: currentColor; //lấy theo  màu color
+        background-color: rgba(254, 44, 85, 0.06);
+    }
+}
+//kích thước nhỏ
+.small {
+    min-width: 88px;
+    padding: 4px 16px;
+}
+//kích thước lớn
+.large {
+    min-width: 140px;
+    padding: 14px 16px;
+}
+//kiểu chữ
+.text {
+    &:hover {
+        text-decoration: underline;
     }
 }
