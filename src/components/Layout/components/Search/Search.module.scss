@@ -1,28 +1,3 @@
-//HEADER
-.wrapper {
-    --search-boder-radius: 92px; //độ cong của boder
-    --search-height: 46px; //chiều cao của thanh search
-    --search-top-spacer: 9px; //khoảng cách bên trên
-    --search-button-width: 52px; //chiều rộng
-
-    width: 100%;
-    height: var(
-        --default-layout-header-height,
-        60px
-    ); // đây là biến chứa chiều cao đã tạo ở GlobalStyle|{,60px => nếu không khai báo biến thì sẽ lấy 60px}|
-    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%); //đường kẻ
-    display: flex; //thu gọn và xắp xếp ngăn nắp các thẻ theo chiều ngang nếu đủ vị trí
-    justify-content: center; //căn giữa các lớp con của Header {inner}
-}
-.inner {
-    height: 100%; //kế thừa lại 100% của cha {wrapper}
-    width: var(--default-layout-width, 1150px); //chiều dài
-    padding: 0 var(--default-layout-horizontal-spacer);
-    // đây là biến chứa chiều DÀI đã tạo ở GlobalStyle|{,1150px => nếu không khai báo biến thì sẽ lấy 1150px}|
-    display: flex; //thu gọn và xắp xếp ngăn nắp các thẻ theo chiều ngang nếu đủ vị trí
-    align-items: center;
-    justify-content: space-between; //cho thằng search ra giữa header(chiều ngang) {chia đều header cho các(3) lớp con của nó}
-}
 .search,
 .search-result {
     width: 361px; //độ rộng của khung thanh tìm kiếm
@@ -98,34 +73,4 @@
         //background của btn sẽ đổi màu khi ấn vào
         background: rgba(22, 24, 35, 0.06);
     }
-}
-.btn-lg {
-    color: blue;
-}
-.actions {
-    display: flex;
-    align-items: center;
-}
-.more-btn {
-    font-size: 2rem;
-    margin: 28px;
-    padding: 4px 8px;
-    background: transparent;
-    cursor: pointer;
-}
-.action-btn {
-    display: flex;
-    font-size: 2.3rem;
-    color: #161823;
-    background-color: transparent;
-    padding: 4px 12px;
-    cursor: pointer;
-}
-.uer-avatar {
-    width: 32px;
-    height: 32px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-left: 14px;
-    cursor: pointer;
 }

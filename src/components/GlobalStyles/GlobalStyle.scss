@@ -1,9 +1,8 @@
 @import 'normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 :root {
     --primary: #fe2c55;
     --black: #000;
-    --text-color: #333;
+    --text-color: #161823;
     //default layout
     --default-layout-header-height: 60px;
     --default-layout-width: 1150px;
@@ -19,11 +18,29 @@ html {
     font-size: 62.5%;
 }
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'ProximaNova', sans-serif;
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
     color: var(--text-color);
+}
+/// Fonts
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/fonts/Proxima-Nova-Regular.woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/fonts/Proxima-Nova-Semibold.woff2');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/fonts/ProximaNova-Semibold.woff2');
+    font-weight: 600;
 }
 //đặt thuộc tính cho tất cả các thẻ
 button,
@@ -35,4 +52,20 @@ input,
 a[href] {
     color: var(--text-color); //đổi màu cho chữ
     text-decoration: none; // bỏ gạch chân
+}
+//Tippy
+body {
+    .tippy-box {
+        border-radius: 8px;
+        font-weight: 600; //cỡ chữ đậm
+        font-size: 1.6rem;
+        line-height: 2.2rem;
+        background-color: rgba(84, 84, 84, 0.92);
+    }
+    .tippy-content {
+        padding: 8px 9px;
+    }
+    .tippy-arrow {
+        color: rgba(84, 84, 84, 0.92);
+    }
 }

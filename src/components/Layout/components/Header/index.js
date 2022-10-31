@@ -1,24 +1,24 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleQuestion,
-    faCircleXmark,
+    faCoins,
     faEarthAsia,
     faEllipsisVertical,
+    faGear,
     faKeyboard,
-    faMagnifyingGlass,
-    faSpinner,
+    faSignOut,
+    faUser,
 } from '@fortawesome/free-solid-svg-icons';
-import Tippy from '@tippyjs/react/headless';
-
+import 'tippy.js/dist/tippy.css';
+import Tippy from '@tippyjs/react';
 import Button from '~/components/Button';
 import Style from './Header.module.scss';
 import images from '~/assets/images';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
-import AccountItem from '~/components/AccountItem';
 import Menu from '~/components/Popper/Menu';
-
+import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icon';
+import Image from '~/components/Image';
+import Search from '../Search';
 const cx = classNames.bind(Style); //dùng Style qua bind để có thể dùng được dấu {-} trong css
 const MENU_ITEMS = [
     {
@@ -56,12 +56,7 @@ const MENU_ITEMS = [
     },
 ];
 function Header() {
-    const [searchResult, setSearchResult] = useState([]);
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([]);
-        }, 0);
-    }, []);
+    const currentUser = true;
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
             case 'Language':
@@ -71,6 +66,30 @@ function Header() {
             default:
         }
     };
+    const userMenu = [
+        {
+            icon: <FontAwesomeIcon icon={faUser} />,
+            title: 'View profile',
+            to: '/',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCoins} />,
+            title: 'Get coins',
+            to: '/coin',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Settings',
+            to: '/setting',
+        },
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut} />,
+            title: 'Log Out',
+            to: '/logout',
+            separate: true,
+        },
+    ];
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -80,49 +99,58 @@ function Header() {
                 </div>
 
                 {/* PHẦN TÌM KIẾM  */}
-                {/* phần tiếp theo sẽ đc render khi ta tìm kiếm */}
-                <Tippy
-                    interactive
-                    visible={searchResult.length > 0}
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={cx('search-title')}>Accounts</h4>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder="Tìm kiếm người dùng và videos" spellCheck={false} /**bỏ check chính tả */ />
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} /> {/*btn Clear*/}
-                        </button>
-                        <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
+                <Search />
 
-                        {/* button tim kiem */}
-                    </div>
-                </Tippy>
                 {/* PHẦN ACTION  */}
+
+                {/* nếu currentUser = true thì sẽ hiển thị phần true , và ngược lại */}
                 <div className={cx('actions')}>
-                    {/* khi truyền className vào component Button thì ta sẽ custom ở header.module.scss */}
-                    {/* <Button primary leftIcon={<FontAwesomeIcon icon={faSignIn} />}>
-                        LOgin
-                    </Button> */}
-                    <Button text>Upload</Button>
-                    <Button primary onClick={() => alert('Clicked !')}>
-                        Log in
-                    </Button>
-                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
-                        <button className={cx('more-btn')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </button>
+                    {currentUser ? (
+                        // true{đã đangw nhập}
+                        <>
+                            <Tippy delay={[0, 100]} content="Tải Lên" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <UploadIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 100]} content="Tin Nhắn" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <MessageIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 100]} content="Hộp Thư" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <InboxIcon />
+                                </button>
+                            </Tippy>
+                        </>
+                    ) : (
+                        // false {không đăng nhập}
+                        <>
+                            {/* khi truyền className vào component Button thì ta sẽ custom ở header.module.scss */}
+                            {/* <Button primary leftIcon={<FontAwesomeIcon icon={faSignIn} />}>
+                                LOgin
+                            </Button> */}
+                            <Button text>Upload</Button>
+                            <Button primary onClick={() => alert('Clicked !')}>
+                                Log in
+                            </Button>
+                        </>
+                    )}
+                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                        {currentUser ? (
+                            <Image
+                                className={cx('uer-avatar')}
+                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/cd7abd213a36896fe47d8df079a58931~c5_100x100.jpeg?x-expires=1667188800&x-signature=nBK8kHQdJmMCl9YAhbagv8%2Fs7QQ%3D"
+                                alt="User"
+                                // nếu link ảnh src lỗi sẽ chạy link ảnh này
+                                fallback="https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-1/310266550_821975592151073_4278382837384015055_n.jpg?stp=cp0_dst-jpg_p40x40&_nc_cat=108&ccb=1-7&_nc_sid=7206a8&_nc_ohc=GTmPRxR9DkcAX_RRC7t&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfB05K246VbHOdPhbcOIzu1hDOViw84p6ewa4q6uVcGZAg&oe=63646FE5"
+                            />
+                        ) : (
+                            <button className={cx('more-btn')}>
+                                <FontAwesomeIcon icon={faEllipsisVertical} />
+                            </button>
+                        )}
                     </Menu>
                 </div>
             </div>
